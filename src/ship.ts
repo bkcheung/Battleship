@@ -4,12 +4,21 @@ function ship(length:number){
         hitCount:0,
         sunk:false,
         hit(){
-            return this.hitCount++;
+            if(this.sunk===false){
+                this.hitCount++;
+                if(this.hitCount===this.length) this.sunk = true;
+            } 
+            return this.hitCount;
         },
+        isSunk(){
+            return this.sunk;
+        }
     }
 }
 
+//testing
 const sheep = ship(3);
 sheep.hit();
 sheep.hit();
-console.log(sheep.hitCount);
+sheep.hit();
+console.log(sheep.isSunk());
