@@ -1,4 +1,4 @@
-export function ship(length:number){
+export function Ship(length:number){
     return{
         length,
         hitCount:0,

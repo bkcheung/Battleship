@@ -1,6 +1,6 @@
-import { ship } from './ship';
+import { Ship } from './ship';
 
-const sheep = ship(3);
+const sheep = Ship(3);
 sheep.hit();
 sheep.hit();
 sheep.hit();
