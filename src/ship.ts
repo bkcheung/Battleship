@@ -1,24 +1,15 @@
-function ship(length:number){
+export function ship(length:number){
     return{
         length,
         hitCount:0,
         sunk:false,
         hit(){
-            if(this.sunk===false){
-                this.hitCount++;
-                if(this.hitCount===this.length) this.sunk = true;
-            } 
+            if(this.sunk===false) this.hitCount++;
             return this.hitCount;
         },
         isSunk(){
+            if(this.hitCount===this.length) this.sunk = true;
             return this.sunk;
         }
     }
 }
-
-//testing
-const sheep = ship(3);
-sheep.hit();
-sheep.hit();
-sheep.hit();
-console.log(sheep.isSunk());
