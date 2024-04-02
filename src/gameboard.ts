@@ -1,13 +1,24 @@
-import { Ship } from './ship'
+import { Ship, CreateShip } from './ship'
 
-export function GameBoard(size:number){
+interface Board {
+    size: number;
+    board: number[][];
+    ships: Ship[];
+    placeShip: (shipLength:number, coords:Array<number>, orientation:string) => boolean;
+    receiveAttack: (coords:number[]) => number[];
+}
+
+export function GameBoard(size:number): Board{
     return{
         size,
         board: generateBoard(size, 0),
-        placeShip(shipLength:number, coordinates:Array<number>, orientation:string){
-            const newShip = Ship(shipLength);
-            const x = coordinates[0];
-            const y = coordinates[1];
+        ships: [],
+        placeShip(shipLength, coords, orientation){
+            const newShip = CreateShip(shipLength);
+            this.ships.push(newShip);
+            console.log(this.ships);
+            const x = coords[0];
+            const y = coords[1];
             if(orientation==='h'){ 
                 if((x+shipLength)<this.size){ 
                     for(let i=0;i<shipLength;i++){ 
@@ -22,12 +33,22 @@ export function GameBoard(size:number){
                 } else return false;   
             }
             if(newShip!==undefined) return true;
+            return false;
+        },
+        receiveAttack(coords){
+            const x = coords[0];
+            const y = coords[1];
+            if(this.board[x][y]===1){
+
+            }
+            return coords;
         }
     }
 }
 
-function generateBoard(size:number, val:any){
-    return Array.from({ length: size }).map(() =>
-        Array.from({ length: size }).fill(val)
-    );
+function generateBoard(size:number, val:number): number[][]{
+    const arr = Array.from({ length: size }).map(() =>
+                    Array.from({ length: size }).fill(val)
+                ) as number[][];
+    return arr;
 }
