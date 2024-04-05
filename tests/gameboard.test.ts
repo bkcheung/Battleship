@@ -17,3 +17,11 @@ it('vertical: ship placed', () => {
 it('vertical: invalid position', () => {
     expect(gb.placeShip(3,[1,10],'v')).toBe(false);
 });
+
+it('received attack', () => {
+    expect(gb.receiveAttack([1,1])).toBe(true);
+})
+
+it('Attack missed', () => {
+    expect(gb.receiveAttack([5,1])).toEqual([5,1]);
+})

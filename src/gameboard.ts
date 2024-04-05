@@ -1,11 +1,11 @@
 import { Ship, CreateShip } from './ship'
 
-interface Board {
+export interface Board {
     size: number;
     board: number[][];
     ships: Ship[];
     placeShip: (shipLength:number, coords:Array<number>, orientation:string) => boolean;
-    receiveAttack: (coords:number[]) => number[];
+    receiveAttack: (coords:number[]) => boolean | number[];
 }
 
 export function GameBoard(size:number): Board{
@@ -14,9 +14,8 @@ export function GameBoard(size:number): Board{
         board: generateBoard(size, 0),
         ships: [],
         placeShip(shipLength, coords, orientation){
-            const newShip = CreateShip(shipLength);
+            const newShip = CreateShip(coords, shipLength);
             this.ships.push(newShip);
-            console.log(this.ships);
             const x = coords[0];
             const y = coords[1];
             if(orientation==='h'){ 
@@ -39,8 +38,11 @@ export function GameBoard(size:number): Board{
             const x = coords[0];
             const y = coords[1];
             if(this.board[x][y]===1){
-
-            }
+                this.ships.forEach((item:Ship) => {
+                    if(item.coord===coords) item.hit()
+                });
+                return true;
+            } 
             return coords;
         }
     }
