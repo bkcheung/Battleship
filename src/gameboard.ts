@@ -5,7 +5,7 @@ export interface Board {
     board: number[][];
     ships: Ship[];
     placeShip: (shipLength:number, coords:Array<number>, orientation:string) => boolean;
-    receiveAttack: (coords:number[]) => boolean | number[];
+    receiveAttack: (coords:number[]) => boolean;
 }
 
 export function GameBoard(size:number): Board{
@@ -45,7 +45,7 @@ export function GameBoard(size:number): Board{
                 return true;
             } 
             this.board[x][y]=-1; //To indicate missed hit
-            return coords;
+            return false;
         }
     }
 }

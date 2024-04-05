@@ -24,7 +24,7 @@ it('Received attack I', () => {
 })
 
 it('Attack missed', () => {
-    expect(gb.receiveAttack([5,1])).toEqual([5,1]);
+    expect(gb.receiveAttack([5,1])).toEqual(false);
     expect(gb.board[5][1]).toBe(-1);
 
 })
