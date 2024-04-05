@@ -1,14 +1,15 @@
 export interface Ship {
+    coord: number[];
     length: number;
     hitCount: number;
     sunk: boolean;
     hit: () => number;
     isSunk: () => boolean;
-
 }
 
-export function CreateShip(length: number): Ship {
+export function CreateShip(coord: number[], length: number): Ship {
     return {
+        coord,
         length,
         hitCount: 0,
         sunk: false,
