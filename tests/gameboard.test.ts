@@ -18,10 +18,13 @@ it('vertical: invalid position', () => {
     expect(gb.placeShip(3,[1,10],'v')).toBe(false);
 });
 
-it('received attack', () => {
+it('Received attack I', () => {
     expect(gb.receiveAttack([1,1])).toBe(true);
+    expect(gb.board[1][1]).toBe(2);
 })
 
 it('Attack missed', () => {
     expect(gb.receiveAttack([5,1])).toEqual([5,1]);
+    expect(gb.board[5][1]).toBe(-1);
+
 })

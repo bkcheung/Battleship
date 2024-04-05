@@ -39,10 +39,12 @@ export function GameBoard(size:number): Board{
             const y = coords[1];
             if(this.board[x][y]===1){
                 this.ships.forEach((item:Ship) => {
-                    if(item.coord===coords) item.hit()
+                    if(item.coord===coords) item.hit(); 
                 });
+                this.board[x][y]=2; //To indicate successful hit
                 return true;
             } 
+            this.board[x][y]=-1; //To indicate missed hit
             return coords;
         }
     }
