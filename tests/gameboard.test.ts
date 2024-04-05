@@ -26,5 +26,8 @@ it('Received attack I', () => {
 it('Attack missed', () => {
     expect(gb.receiveAttack([5,1])).toEqual(false);
     expect(gb.board[5][1]).toBe(-1);
+})
 
+it('Ships not all sunk', () =>{
+    expect(gb.shipStatus()).toEqual(false);
 })

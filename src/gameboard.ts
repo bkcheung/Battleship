@@ -6,6 +6,7 @@ export interface Board {
     ships: Ship[];
     placeShip: (shipLength:number, coords:Array<number>, orientation:string) => boolean;
     receiveAttack: (coords:number[]) => boolean;
+    shipStatus: () => boolean;
 }
 
 export function GameBoard(size:number): Board{
@@ -46,6 +47,13 @@ export function GameBoard(size:number): Board{
             } 
             this.board[x][y]=-1; //To indicate missed hit
             return false;
+        },
+        shipStatus(){
+            let allSunk = true;
+            this.ships.forEach((item:Ship) => {
+                if(item.sunk===false) allSunk = false;
+            });
+            return allSunk;
         }
     }
 }
