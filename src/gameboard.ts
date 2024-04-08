@@ -57,8 +57,7 @@ export function GameBoard(size:number): Board{
         shipStatus(){
             let allSunk = true;
             this.ships.forEach((item:Ship) => {
-                item.isSunk();
-                if(item.sunk===false) allSunk = false;
+                if(!item.isSunk()) allSunk = false;
             });
             return allSunk;
         }
