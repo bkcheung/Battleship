@@ -19,24 +19,24 @@ export function GameBoard(size:number): Board{
             const c = coords[1];
             if(checkPlacement(this.board, coords, shipLength, orientation, this.size)){
                 //ship placement is valid!
-                const newShip = CreateShip(coords, orientation, shipLength);
-                this.ships.push(newShip);
                 if(orientation==='h'){ 
                     if((c+shipLength)<this.size){ 
+                        const newShip = CreateShip(coords, orientation, shipLength);
+                        this.ships.push(newShip);
                         for(let i=0;i<shipLength;i++){ 
                             this.board[r][c+i] = 1;
                         }
                     } else return false;
                 } else if(orientation==='v'){
                     if((r+shipLength)<this.size){
+                        const newShip = CreateShip(coords, orientation, shipLength);
+                        this.ships.push(newShip);
                         for(let i=0;i<shipLength;i++){ 
                             this.board[r+i][c] = 1;
                         }
                     } else return false;   
-                }
-                if(newShip!==undefined) return true;
-            }
-            return false;
+                } return true;
+            } return false;
         },
         receiveAttack(coords){
             const r = coords[0];
@@ -57,7 +57,8 @@ export function GameBoard(size:number): Board{
         shipStatus(){
             let allSunk = true;
             this.ships.forEach((item:Ship) => {
-                if(!item.isSunk()) allSunk = false;
+                item.isSunk();
+                if(item.sunk===false) allSunk = false;
             });
             return allSunk;
         }
