@@ -1,0 +1,54 @@
+body {
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+header {
+    margin: 30px;
+    font-size: 5em;
+}
+
+#pageBody{
+    margin: 30px;
+    display: flex;
+}
+
+.gb{
+    padding: 10px;
+    flex:1;
+    text-align: center;
+}
+
+.gameboard{
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(11,1fr);
+    align-items: center;
+}
+.letterSq{
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.numSq{
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bodySq{
+    border: solid;
+    margin: -1px;
+    width: 2em;
+    height: 2em;
+}
+
+#fleet{
+    margin: 10px;
+    padding: 10px;
+    flex:1;
+    text-align: center;
+}
