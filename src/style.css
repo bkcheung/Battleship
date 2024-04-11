@@ -42,8 +42,12 @@ header {
 .bodySq{
     border: solid;
     margin: -1px;
-    width: 2em;
-    height: 2em;
+    min-width: 2em;
+    min-height: 2em;
+}
+
+.shipPresent{
+    background-color: rgba(147, 147, 147, 0.3);
 }
 
 #fleet{
