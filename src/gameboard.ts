@@ -20,7 +20,7 @@ export function GameBoard(size:number): Board{
             if(checkPlacement(this.board, coords, shipLength, orientation, this.size)){
                 //ship placement is valid!
                 if(orientation==='h'){ 
-                    if((c+shipLength)<this.size){ 
+                    if((c+shipLength)<=this.size){ 
                         const newShip = CreateShip(coords, orientation, shipLength);
                         this.ships.push(newShip);
                         for(let i=0;i<shipLength;i++){ 
@@ -28,7 +28,7 @@ export function GameBoard(size:number): Board{
                         }
                     } else return false;
                 } else if(orientation==='v'){
-                    if((r+shipLength)<this.size){
+                    if((r+shipLength)<=this.size){
                         const newShip = CreateShip(coords, orientation, shipLength);
                         this.ships.push(newShip);
                         for(let i=0;i<shipLength;i++){ 
@@ -76,11 +76,11 @@ function checkPlacement(board: number[][], coord: number[], length: number, orie
     const c = coord[1];
     let valid = true;
 
-    if(orient==='h' && (c+length)<size){
+    if(orient==='h' && (c+length)<=size){
         for(let i=0;i<length;i++){
             if(board[r][c+i]===1) valid = false;
         }
-    } else if(orient==='v' && (r+length)<size) {
+    } else if(orient==='v' && (r+length)<=size) {
         for(let i=0;i<length;i++){
             if(board[r+i][c]===1) valid = false;
         }
