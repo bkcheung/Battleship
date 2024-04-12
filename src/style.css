@@ -1,24 +1,36 @@
 body {
     font-family: Roboto, 'Helvetica Neue', sans-serif;
+    background-image: url(./img/water.jpeg);
+    background-size: cover;
 }
 header {
     margin: 30px;
     font-size: 5em;
+    color: #ffffffd9;
 }
-
-#pageBody{
-    margin: 30px;
+span{
+    background-size: contain;
+    background-repeat: no-repeat;
     display: flex;
 }
-
+#pageBody{
+    margin-left: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    align-items: center;
+    color: #ffffffd9;
+}
 .gb{
     padding: 10px;
-    flex:1;
     text-align: center;
+    background-color: #00000057;
+    border: 2px #ffffff70 outset;
+    border-radius: 1em;
 }
-
 .gameboard{
     display: grid;
+    margin: 0px 20px 20px 0px;
     grid-template-columns: repeat(11, 1fr);
     grid-template-rows: repeat(11,1fr);
     align-items: center;
@@ -30,7 +42,6 @@ header {
     justify-content: center;
     align-items: center;
 }
-
 .numSq{
     width: 2em;
     height: 2em;
@@ -38,21 +49,54 @@ header {
     justify-content: center;
     align-items: center;
 }
-
 .bodySq{
     border: solid;
     margin: -1px;
     min-width: 2em;
     min-height: 2em;
 }
-
 .shipPresent{
-    background-color: rgba(147, 147, 147, 0.3);
+    background-color: #ffffff88;
 }
 
 #fleet{
-    margin: 10px;
     padding: 10px;
-    flex:1;
     text-align: center;
+    background-color: #00000057;
+    border: 2px #ffffff70 outset;
+    border-radius: 1em;
+    min-height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#fleetList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#aircraft{
+    background-image: url("./img/aircraft-carrier.png");
+    width: 200px;
+    height: 60px;
+}
+#battleship{
+    background-image: url("./img/battleship.png");
+    width: 180px;
+    height: 60px;
+}
+#cruiser{
+    background-image: url("./img/cruiser.png");
+    width: 150px;
+    height: 60px;
+}
+#sub{
+    background-image: url("./img/sub.png");
+    width: 150px;
+    height: 60px;
+}
+#destroyer{
+    background-image: url("./img/destroyer.png");
+    width: 100px;
+    height: 60px;
 }
