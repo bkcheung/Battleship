@@ -38,15 +38,15 @@ function drawBoard(size:number){
         letterSq.textContent = String.fromCharCode(code+i);
         board.appendChild(letterSq);
     }
-    for(let i=1; i<size+1;i++){
+    for(let i=0; i<size;i++){
         const numSq = document.createElement('div');
         numSq.classList.add('numSq');
-        // numSq.classList.add(`${i}`);
         numSq.textContent = String(i);
         board.appendChild(numSq);
-        for(let j=1;j<size+1;j++){
+        for(let j=0;j<size;j++){
             const bodySq = document.createElement('div');
             bodySq.classList.add('bodySq');
+            bodySq.setAttribute('coord',`[${i},${j}]`);
             board.appendChild(bodySq);
         }
     }
