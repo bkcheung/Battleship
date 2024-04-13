@@ -1,20 +1,21 @@
 import { Board } from "./gameboard";
 import { Ship } from "./ship";
 
-export function initBoard(size:number){
+export function initBoard(size:number, compBoard:Board, playerBoard:Board){
     const cBoard = document.getElementById('cBoard');
     cBoard.appendChild(drawBoard(size));
     const pBoard = document.getElementById('pBoard');
     pBoard.appendChild(drawBoard(size));
+    renderShips(playerBoard);
+    initAttackInt(compBoard);
 }
 
-export function renderShips(gameboard: Board, id:string){
+export function renderShips(gameboard: Board){
+    const id = gameboard.id;
     const ships = gameboard.ships;
     ships.forEach((ship:Ship) => {
         const coords = ship.allCoords();
-        coords.forEach((coord:number[])=>{
-            rShipPresent(coord, id);
-        })
+        coords.forEach((coord:number[])=>{ rShipPresent(coord, id);})
     })
 }
 
@@ -46,9 +47,24 @@ function drawBoard(size:number){
         for(let j=0;j<size;j++){
             const bodySq = document.createElement('div');
             bodySq.classList.add('bodySq');
-            bodySq.setAttribute('coord',`[${i},${j}]`);
+            bodySq.setAttribute('row',`${i}`);
+            bodySq.setAttribute('col',`${j}`);
             board.appendChild(bodySq);
         }
     }
     return board;
+}
+
+function initAttackInt(gameboard:Board){
+    const board = document.getElementById(`${gameboard.id}`);
+    const bodySq = board.getElementsByClassName('bodySq');
+    for(let i=0;i<bodySq.length;i++){
+        const row = Number(bodySq[i].getAttribute('row'));
+        const col = Number(bodySq[i].getAttribute('col'));
+        const coord = [row,col];
+        bodySq[i].addEventListener('click',()=>{
+            if(gameboard.receiveAttack(coord)){ bodySq[i].classList.add('hit');}
+            else{ bodySq[i].classList.add('miss');}
+        });
+    }
 }
