@@ -1,6 +1,7 @@
 import { Ship, CreateShip } from './ship'
 
 export interface Board {
+    id: string,
     size: number;
     board: number[][];
     ships: Ship[];
@@ -9,8 +10,9 @@ export interface Board {
     shipStatus: () => boolean;
 }
 
-export function GameBoard(size:number): Board{
+export function GameBoard(size:number, id:string): Board{
     return{
+        id,
         size,
         board: generateBoard(size, 0),
         ships: [],

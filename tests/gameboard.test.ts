@@ -1,6 +1,6 @@
 import { GameBoard } from "../src/gameboard";
 
-const gb = GameBoard(10);
+const gb = GameBoard(10, 'pBoard');
 
 it('horizontal: ship placed', () => {
     expect(gb.placeShip(3,[1,1],'h')).toBe(true);
