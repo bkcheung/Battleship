@@ -1,16 +1,30 @@
 import { Board } from "./gameboard";
 import { Ship } from "./ship";
+import {createPlayer, createComputer} from "./player";
+import { GameBoard } from './gameboard';
 
-export function initBoard(size:number, compBoard:Board, playerBoard:Board){
+
+export function initBoard(size:number, playerBoard:Board){
+    const compBoard = createComputer(size).gameboard;
     const cBoard = document.getElementById('cBoard');
     cBoard.appendChild(drawBoard(size));
     const pBoard = document.getElementById('pBoard');
     pBoard.appendChild(drawBoard(size));
     renderShips(playerBoard);
+    renderShips(compBoard); //debug only
     initAttackInt(compBoard);
 }
 
-export function renderShips(gameboard: Board){
+function initComputer(){
+    const comp = createComputer(10);
+}
+
+function gamePlay(){
+    const turn = document.getElementById('status').getAttribute('turn');
+
+}
+
+function renderShips(gameboard: Board){
     const id = gameboard.id;
     const ships = gameboard.ships;
     ships.forEach((ship:Ship) => {
@@ -63,8 +77,13 @@ function initAttackInt(gameboard:Board){
         const col = Number(bodySq[i].getAttribute('col'));
         const coord = [row,col];
         bodySq[i].addEventListener('click',()=>{
-            if(gameboard.receiveAttack(coord)){ bodySq[i].classList.add('hit');}
-            else{ bodySq[i].classList.add('miss');}
+            const turn = document.getElementById('status');
+            if(turn.getAttribute('turn')==="pturn"){
+                if(gameboard.receiveAttack(coord)){ bodySq[i].classList.add('hit');}
+                else{ bodySq[i].classList.add('miss');}
+                turn.setAttribute('turn','cturn'); 
+                turn.innerHTML = "Computer's Turn";
+            }
         });
     }
 }

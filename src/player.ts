@@ -1,4 +1,4 @@
-import { Board } from "./gameboard"
+import { Board, GameBoard } from "./gameboard"
 
 interface Player{
     name: string,
@@ -6,7 +6,6 @@ interface Player{
 }
 
 interface Computer{
-    name: string,
     gameboard: Board,
     moves: number[][],
     genAttack: () => number[],
@@ -20,20 +19,35 @@ export function createPlayer(name: string, gameboard: Board): Player{
     }
 }
 
-export function createComputer(name:string, gameboard:Board): Computer{
+export function createComputer(size:number): Computer{
     return{
-        name,
-        gameboard,
+        gameboard: populateBoard(GameBoard(size, 'cBoard')),
         moves:[], 
         genAttack(){
-            let coords = genCoords(gameboard.size);
+            let coords = genCoords(size);
             while(this.moves.includes(coords)){
-                coords = genCoords(gameboard.size);
+                coords = genCoords(size);
             };
             this.moves.push(coords);
             return coords;
         }
     }
+}
+
+export function populateBoard(board: Board){
+    const slengths = [5,4,3,3,2];
+    const orients = ['h','v'];
+    let success = false;
+    for(let i=0;i<5;i++){
+        while(!success){
+            const length = slengths[i];
+            const coords = genCoords(board.size);
+            const orientation = orients[Math.round(Math.random())];
+            success = board.placeShip(length,coords,orientation);
+        }
+        success = false;
+    }
+    return board;
 }
 
 function genCoords(boardSize: number){
