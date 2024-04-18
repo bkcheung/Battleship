@@ -13,6 +13,18 @@ span{
     background-repeat: no-repeat;
     display: flex;
 }
+#battleLog{
+    color: #ffffffd9;
+    padding: 10px;
+    background-color: #00000057;
+    border: 2px #ffffff70 outset;
+    border-radius: 1em;
+    min-height: 95%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
 #pageBody{
     margin-left: 30px;
     display: grid;
@@ -69,19 +81,18 @@ span{
 }
 
 #fleet{
+    margin: 30px;
     padding: 10px;
-    text-align: center;
+    color: #ffffffd9;
+    /* text-align: center; */
     background-color: #00000057;
     border: 2px #ffffff70 outset;
     border-radius: 1em;
-    min-height: 95%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 #fleetList{
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
 #aircraft{
