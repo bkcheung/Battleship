@@ -1,30 +1,25 @@
 import { Board } from "./gameboard";
 import { Ship } from "./ship";
-import {createPlayer, createComputer} from "./player";
+import {createPlayer, Player} from "./player";
 import { GameBoard } from './gameboard';
 
 
-export function initBoard(size:number, playerBoard:Board){
-    const compBoard = createComputer(size).gameboard;
+export function init(size:number, player: Player, computer:Player){
+    initBoard(size);
+    renderShips(player);
+    renderShips(computer); //dev only
+    initAttackInt(player, computer);
+}
+
+function initBoard(size:number){
     const cBoard = document.getElementById('cBoard');
     cBoard.appendChild(drawBoard(size));
     const pBoard = document.getElementById('pBoard');
     pBoard.appendChild(drawBoard(size));
-    renderShips(playerBoard);
-    renderShips(compBoard); //debug only
-    initAttackInt(compBoard);
 }
 
-function initComputer(){
-    const comp = createComputer(10);
-}
-
-function gamePlay(){
-    const turn = document.getElementById('status').getAttribute('turn');
-
-}
-
-function renderShips(gameboard: Board){
+function renderShips(player: Player){
+    const gameboard = player.gameboard;
     const id = gameboard.id;
     const ships = gameboard.ships;
     ships.forEach((ship:Ship) => {
@@ -69,21 +64,63 @@ function drawBoard(size:number){
     return board;
 }
 
-function initAttackInt(gameboard:Board){
-    const board = document.getElementById(`${gameboard.id}`);
-    const bodySq = board.getElementsByClassName('bodySq');
-    for(let i=0;i<bodySq.length;i++){
-        const row = Number(bodySq[i].getAttribute('row'));
-        const col = Number(bodySq[i].getAttribute('col'));
+function initAttackInt(player:Player, computer: Player){
+    const cgb = computer.gameboard;
+    const cBoard = document.getElementById(`${cgb.id}`);
+    const cBodySq = cBoard.getElementsByClassName('bodySq');
+    //Init computer board to receive attacks
+    for(let i=0;i<cBodySq.length;i++){
+        const row = Number(cBodySq[i].getAttribute('row'));
+        const col = Number(cBodySq[i].getAttribute('col'));
         const coord = [row,col];
-        bodySq[i].addEventListener('click',()=>{
-            const turn = document.getElementById('status');
-            if(turn.getAttribute('turn')==="pturn"){
-                if(gameboard.receiveAttack(coord)){ bodySq[i].classList.add('hit');}
-                else{ bodySq[i].classList.add('miss');}
-                turn.setAttribute('turn','cturn'); 
-                turn.innerHTML = "Computer's Turn";
-            }
+        cBodySq[i].addEventListener('click',()=>{
+            if(cgb.receiveAttack(coord)){hit(cBodySq[i]);}
+            else {miss(cBodySq[i])}
+            compPlay(player);
         });
     }
+}
+
+function compPlay(player:Player){
+    setTurn('cturn');
+    setTimeout(()=>{
+        const coords = player.genAttack();
+        const row = coords[0];
+        const col = coords[1];
+        const pgb = player.gameboard;
+        const pBoard = document.getElementById(`${pgb.id}`);
+        const sq = Array.from(pBoard.getElementsByClassName('bodySq')).filter(el => {
+            return Number(el.getAttribute('row'))===row && Number(el.getAttribute('col'))===col;
+        })[0];
+        console.log(sq);
+        if(player.gameboard.receiveAttack(coords)){ 
+            hit(sq);
+        } else {
+            miss(sq);
+        }
+        setTurn('pturn');
+    },1000);
+}
+
+function setTurn(turnID:string){
+    const turn = document.getElementById('status');
+    turn.setAttribute('turn',turnID);
+    if(turnID==='cturn'){turn.innerHTML = "Computer's Turn";}
+    else if(turnID==='pturn'){turn.innerHTML = "Player's Turn"}
+}
+
+function hit(sq:Element){
+    const log = document.getElementById('log');
+    sq.classList.add('hit');
+    const msg = document.createElement('div');
+    msg.innerHTML = 'Hit!';
+    log.appendChild(msg);
+}
+
+function miss(sq:Element){
+    const log = document.getElementById('log');
+    sq.classList.add('miss');
+    const msg = document.createElement('div');
+    msg.innerHTML = 'Miss';
+    log.appendChild(msg);
 }
