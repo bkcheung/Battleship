@@ -1,27 +1,14 @@
-import { Board, GameBoard } from "./gameboard"
+import { Board } from "./gameboard"
 
-interface Player{
-    name: string,
-    gameboard: Board,
-}
-
-interface Computer{
+export interface Player{
     gameboard: Board,
     moves: number[][],
     genAttack: () => number[],
-    
 }
 
-export function createPlayer(name: string, gameboard: Board): Player{
+export function createPlayer(size:number, gameboard: Board): Player{
     return {
-        name,
-        gameboard
-    }
-}
-
-export function createComputer(size:number): Computer{
-    return{
-        gameboard: populateBoard(GameBoard(size, 'cBoard')),
+        gameboard,
         moves:[], 
         genAttack(){
             let coords = genCoords(size);
