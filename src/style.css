@@ -1,5 +1,5 @@
 body {
-    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    font-family: Consolas, DejaVu Sans Mono, Menlo;
     background-image: url(./img/water.jpeg);
     background-size: cover;
 }
@@ -23,12 +23,18 @@ span{
     display: flex;
     flex-direction: column;
     text-align: center;
+    justify-content: space-between;
 }
-
 #log{
     margin: 10px;
+    text-align: left;
 }
-
+.logMsg{
+    margin: 10px;
+}
+#status{
+    margin: 30px;
+}
 #pageBody{
     margin-left: 30px;
     display: grid;

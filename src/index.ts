@@ -1,20 +1,10 @@
 import "./style.css";
-import {initBoard, renderShips} from './interface'
-import { CreateShip } from './ship';
+import {init} from './interface'
 import { GameBoard } from './gameboard';
+import { populateBoard, createPlayer } from "./player";
 
-initBoard(10);
-const gb = GameBoard(10);
-gb.placeShip(3,[3,1],'v');
-gb.placeShip(5, [5,5], 'v');
-gb.placeShip(4, [2,5], 'h');
+const size = 10;
+const computer = createPlayer(size, populateBoard(GameBoard(size, 'cBoard')));
+const player = createPlayer(size, populateBoard(GameBoard(size, 'pBoard')));
+init(size, player, computer);
 
-const cgb = GameBoard(10);
-cgb.placeShip(3,[3,1],'h');
-cgb.placeShip(5, [8,3], 'h');
-cgb.placeShip(4, [2,8], 'v');
-
-renderShips(gb, "pBoard");
-renderShips(cgb, "cBoard");
-
-gb.receiveAttack([3,1]);

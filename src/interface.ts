@@ -7,7 +7,6 @@ import { GameBoard } from './gameboard';
 export function init(size:number, player: Player, computer:Player){
     initBoard(size);
     renderShips(player);
-    renderShips(computer); //dev only
     initAttackInt(player, computer);
 }
 
@@ -74,8 +73,8 @@ function initAttackInt(player:Player, computer: Player){
         const col = Number(cBodySq[i].getAttribute('col'));
         const coord = [row,col];
         cBodySq[i].addEventListener('click',()=>{
-            if(cgb.receiveAttack(coord)){hit(cBodySq[i]);}
-            else {miss(cBodySq[i])}
+            if(cgb.receiveAttack(coord)){hit(cBodySq[i], coord, 'Player');}
+            else {miss(cBodySq[i], coord, 'Player')}
             compPlay(player);
         });
     }
@@ -94,9 +93,9 @@ function compPlay(player:Player){
         })[0];
         console.log(sq);
         if(player.gameboard.receiveAttack(coords)){ 
-            hit(sq);
+            hit(sq, coords, 'Computer');
         } else {
-            miss(sq);
+            miss(sq, coords, 'Computer');
         }
         setTurn('pturn');
     },1000);
@@ -105,22 +104,24 @@ function compPlay(player:Player){
 function setTurn(turnID:string){
     const turn = document.getElementById('status');
     turn.setAttribute('turn',turnID);
-    if(turnID==='cturn'){turn.innerHTML = "Computer's Turn";}
-    else if(turnID==='pturn'){turn.innerHTML = "Player's Turn"}
+    if(turnID==='cturn'){turn.innerHTML = "...awaiting computer's attack";}
+    else if(turnID==='pturn'){turn.innerHTML = "...awaiting player's attack"}
 }
 
-function hit(sq:Element){
+function hit(sq:Element, coord: number[], player:String){
     const log = document.getElementById('log');
     sq.classList.add('hit');
     const msg = document.createElement('div');
-    msg.innerHTML = 'Hit!';
+    msg.classList.add('logMsg');
+    msg.innerHTML = `Hit! ${player} attacked [${coord}]`;
     log.appendChild(msg);
 }
 
-function miss(sq:Element){
+function miss(sq:Element, coord: number[],player:String){
     const log = document.getElementById('log');
     sq.classList.add('miss');
     const msg = document.createElement('div');
-    msg.innerHTML = 'Miss';
+    msg.classList.add('logMsg');
+    msg.innerHTML = `Miss, ${player} attacked [${coord}]`;
     log.appendChild(msg);
 }
