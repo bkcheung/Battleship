@@ -115,6 +115,7 @@ function hit(sq:Element, coord: number[], player:String){
     msg.classList.add('logMsg');
     msg.innerHTML = `Hit! ${player} attacked [${coord}]`;
     log.appendChild(msg);
+    updateScroll();
 }
 
 function miss(sq:Element, coord: number[],player:String){
@@ -124,4 +125,10 @@ function miss(sq:Element, coord: number[],player:String){
     msg.classList.add('logMsg');
     msg.innerHTML = `Miss, ${player} attacked [${coord}]`;
     log.appendChild(msg);
+    updateScroll();
+}
+
+function updateScroll(){
+    var element = document.getElementById("log");
+    element.scrollTop = element.scrollHeight;
 }
