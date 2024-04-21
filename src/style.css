@@ -28,6 +28,12 @@ span{
 #log{
     margin: 10px;
     text-align: left;
+    background-color: #0000005c;
+    border-radius: 0.5em;
+    height: 20em;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 .logMsg{
     margin: 10px;
