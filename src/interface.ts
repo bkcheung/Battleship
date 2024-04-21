@@ -73,9 +73,12 @@ function initAttackInt(player:Player, computer: Player){
         const col = Number(cBodySq[i].getAttribute('col'));
         const coord = [row,col];
         cBodySq[i].addEventListener('click',()=>{
-            if(cgb.receiveAttack(coord)){hit(cBodySq[i], coord, 'Player');}
-            else {miss(cBodySq[i], coord, 'Player')}
-            compPlay(player);
+            if(!player.moves.includes(coord)){
+                player.moves.push(coord);
+                if(cgb.receiveAttack(coord)){hit(cBodySq[i], coord, 'Player');}
+                else {miss(cBodySq[i], coord, 'Player')}
+                compPlay(player);
+            } 
         });
     }
 }
