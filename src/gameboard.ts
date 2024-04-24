@@ -5,7 +5,7 @@ export interface Board {
     size: number;
     board: number[][];
     ships: Ship[];
-    placeShip: (shipLength:number, coords:Array<number>, orientation:string) => boolean;
+    placeShip: (id:string, shipLength:number, coords:Array<number>, orientation:string) => boolean;
     receiveAttack: (coords:number[]) => boolean;
     shipStatus: () => boolean;
 }
@@ -16,14 +16,14 @@ export function GameBoard(size:number, id:string): Board{
         size,
         board: generateBoard(size, 0),
         ships: [],
-        placeShip(shipLength, coords, orientation){
+        placeShip(id, shipLength, coords, orientation){
             const r = coords[0];
             const c = coords[1];
             if(checkPlacement(this.board, coords, shipLength, orientation, this.size)){
                 //ship placement is valid!
                 if(orientation==='h'){ 
                     if((c+shipLength)<=this.size){ 
-                        const newShip = CreateShip(coords, orientation, shipLength);
+                        const newShip = CreateShip(id, coords, orientation, shipLength);
                         this.ships.push(newShip);
                         for(let i=0;i<shipLength;i++){ 
                             this.board[r][c+i] = 1;
@@ -31,7 +31,7 @@ export function GameBoard(size:number, id:string): Board{
                     } else return false;
                 } else if(orientation==='v'){
                     if((r+shipLength)<=this.size){
-                        const newShip = CreateShip(coords, orientation, shipLength);
+                        const newShip = CreateShip(id, coords, orientation, shipLength);
                         this.ships.push(newShip);
                         for(let i=0;i<shipLength;i++){ 
                             this.board[r+i][c] = 1;

@@ -1,6 +1,7 @@
 import { start } from "repl";
 
 export interface Ship {
+    id: string;
     startCoord: number[];
     orientation: string;
     length: number;
@@ -11,8 +12,9 @@ export interface Ship {
     allCoords: () => number[][];
 }
 
-export function CreateShip(startCoord: number[], orientation:string, length: number): Ship {
+export function CreateShip(id:string, startCoord: number[], orientation:string, length: number): Ship {
     return {
+        id,
         startCoord,
         orientation,
         length,
