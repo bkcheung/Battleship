@@ -52,22 +52,14 @@ function setTurn(turnID:string){
 }
 
 function hit(sq:Element, coord: number[], player:String){
-    const log = document.getElementById('log');
     sq.classList.add('hit');
-    const msg = document.createElement('div');
-    msg.classList.add('logMsg');
-    msg.innerHTML = `Hit! ${player} attacked [${coord}]`;
-    log.appendChild(msg);
+    addMsg(`Hit! ${player} attacked [${coord}]`);
     updateScroll();
 }
 
 function miss(sq:Element, coord: number[],player:String){
-    const log = document.getElementById('log');
     sq.classList.add('miss');
-    const msg = document.createElement('div');
-    msg.classList.add('logMsg');
-    msg.innerHTML = `Miss, ${player} attacked [${coord}]`;
-    log.appendChild(msg);
+    addMsg(`Miss, ${player} attacked [${coord}]`);
     updateScroll();
 }
 
@@ -76,14 +68,32 @@ function updateScroll(){
     log.scrollTop = log.scrollHeight;
 }
 
+function addMsg(message:string){
+    const log = document.getElementById('log');
+    const msg = document.createElement('div');
+    msg.classList.add('logMsg');
+    msg.innerHTML = `${message}`;
+    log.appendChild(msg);
+}
+
 function checkStatus(player:Player, coords:number[]){
     const ships = player.gameboard.ships;
     for(let i=0; i<5;i++){
         const allC = ships[i].allCoords();
+        let id: string;
         for(let j=0; j<allC.length;j++){
             if(allC[j][0]===coords[0]&&allC[j][1]===coords[1]){
-                console.log(ships[i].id);
+                id = ships[i].id;
+                if(ships[i].isSunk()){
+                    addMsg(`${id} ship is sunk`)
+                }
+                break;
             }
         }
+        if(id!==undefined) break;
+    }
+    //do something with id
+    if(player.gameboard.shipStatus){
+        //opp player wins, game ends
     }
 }
