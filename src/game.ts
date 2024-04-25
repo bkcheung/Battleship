@@ -80,12 +80,15 @@ function checkStatus(player:Player, coords:number[]){
     const ships = player.gameboard.ships;
     for(let i=0; i<5;i++){
         const allC = ships[i].allCoords();
+        let pid: string;
         let id: string;
         for(let j=0; j<allC.length;j++){
             if(allC[j][0]===coords[0]&&allC[j][1]===coords[1]){
                 id = ships[i].id;
                 if(ships[i].isSunk()){
-                    addMsg(`${id} ship is sunk`)
+                    if(player.gameboard.id==='pBoard') pid = 'Player';
+                    else if(player.gameboard.id==='cBoard') pid = 'Computer';
+                    addMsg(`${pid}'s ${id} sunk`)
                 }
                 break;
             }
