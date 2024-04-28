@@ -1,13 +1,16 @@
 import { Ship } from "./ship";
 import { Player} from "./player";
-import { createGame } from "./game"
+import { Game, createGame } from "./game"
 
 
 export function init(size:number, player: Player, computer:Player){
     initBoard(size);
+    const game = createGame(player, computer)
+    game.initAttackInt();
     renderShips(player);
     renderShips(computer); //dev
-    createGame(player, computer).initAttackInt();
+    renderFleet(game.player);
+    renderFleet(game.computer);
 }
 
 function initBoard(size:number){
@@ -61,4 +64,27 @@ function drawBoard(size:number){
         }
     }
     return board;
+}
+
+function renderFleet(player: Player){
+    const ships = player.gameboard.ships;
+    let fleetID:string;
+    if(player.gameboard.id==='pBoard') fleetID = 'pfleet';
+    else if(player.gameboard.id==='cBoard') fleetID = 'cfleet';
+    const fleet = document.getElementById(fleetID);
+    for(let i=0; i<ships.length; i++){
+        const id = ships[i].id;
+        const length = ships[i].length;
+        const span = document.createElement('span');
+        span.classList.add(id);
+        span.classList.add('shipRender');
+        const status = document.createElement('span');
+        for(let j=0; j<length;j++){
+            const square = document.createElement('div');
+            square.classList.add('fleetStatus');
+            status.appendChild(square);
+        }
+        span.appendChild(status);
+        fleet.appendChild(span);
+    }
 }
