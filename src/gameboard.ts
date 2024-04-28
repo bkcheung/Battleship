@@ -2,12 +2,12 @@ import { Ship, CreateShip } from './ship'
 
 export interface Board {
     id: string,
-    size: number;
-    board: number[][];
-    ships: Ship[];
-    placeShip: (id:string, shipLength:number, coords:Array<number>, orientation:string) => boolean;
-    receiveAttack: (coords:number[]) => boolean;
-    shipStatus: () => boolean;
+    size: number,
+    board: number[][],
+    ships: Ship[],
+    placeShip: (id:string, shipLength:number, coords:Array<number>, orientation:string) => boolean,
+    receiveAttack: (coords:number[]) => boolean,
+    shipStatus: () => boolean,
 }
 
 export function GameBoard(size:number, id:string): Board{

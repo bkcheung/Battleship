@@ -22,10 +22,11 @@ export function createPlayer(size:number, gameboard: Board): Player{
 }
 
 export function populateBoard(board: Board){
-    const ships = [[5,'aircraft carrier'],[4,'battleship'],[3,'cruiser'],[3,'submarine'],[2,'destroyer']]
+    // const ships = [[5,'aircraft carrier'],[4,'battleship'],[3,'cruiser'],[3,'submarine'],[2,'destroyer']]
+    const ships = [[3,'submarine'],[2,'destroyer']] //for dev only
     const orients = ['h','v'];
     let success = false;
-    for(let i=0;i<5;i++){
+    for(let i=0;i<2;i++){
         while(!success){
             const length = Number(ships[i][0]);
             const id = String(ships[i][1]);

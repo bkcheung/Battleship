@@ -1,12 +1,13 @@
 import { Ship } from "./ship";
 import { Player} from "./player";
-import { initAttackInt } from "./game"
+import { createGame } from "./game"
 
 
 export function init(size:number, player: Player, computer:Player){
     initBoard(size);
     renderShips(player);
-    initAttackInt(player, computer);
+    renderShips(computer); //dev
+    createGame(player, computer).initAttackInt();
 }
 
 function initBoard(size:number){
