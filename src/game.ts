@@ -3,10 +3,9 @@ import { Player } from "./player"
 interface Game {
     player: Player,
     computer: Player,
-    turn: string,
     gameDone: boolean,
-    initAttackInt: () => boolean,
-    compPlay: (player: Player) => boolean,
+    initAttackInt: () => void,
+    compPlay: (player: Player) => void,
     checkStatus: (player: Player, coords: number[]) => void,
 }
 
@@ -14,7 +13,6 @@ export function createGame(player:Player, computer:Player): Game{
     return{
         player,
         computer,
-        turn: 'pturn',
         gameDone: false,
         initAttackInt(){
             const cgb = computer.gameboard;
@@ -33,16 +31,13 @@ export function createGame(player:Player, computer:Player): Game{
                             this.checkStatus(computer, coords);
                         }
                         else{miss(cBodySq[i], coords, 'Player')}
-                        this.compPlay(player);
+                        if(this.gameDone===false)this.compPlay(player);
+                        updateScroll();
                     } 
                 });
-            } return true;
+            }
         },
         compPlay(player:Player){
-            if(this.gameDone===true){
-                updateScroll();
-                return false;
-            }
             setTurn('cturn');
             setTimeout(()=>{
                 const coords = player.genAttack();
@@ -59,9 +54,9 @@ export function createGame(player:Player, computer:Player): Game{
                 } else {
                     miss(sq, coords, 'Computer');
                 }
+                updateScroll();
                 setTurn('pturn');
-            },1000);
-            return true;
+            },250);
         },
         checkStatus(player:Player, coords:number[]){
             const ships = player.gameboard.ships;
@@ -82,14 +77,12 @@ export function createGame(player:Player, computer:Player): Game{
             }
             //do something graphically with id
             if(player.gameboard.shipStatus()){
-                //opp player wins, game ends
+                this.gameDone = true;
                 let winner:string;
                 if(player.gameboard.id==='pBoard') winner = 'Computer';
                 else if(player.gameboard.id==='cBoard') winner = 'Player';
-                addMsg(`All ships sunk ${winner} wins!`);
-                this.gameDone = true;
+                addMsg(`All ships sunk. ${winner} wins!`);
             }
-            return;
         },
     }
 }
@@ -104,13 +97,11 @@ function setTurn(turnID:string){
 function hit(sq:Element, coord: number[], player:String){
     sq.classList.add('hit');
     addMsg(`Hit! ${player} attacked [${coord}]`);
-    updateScroll();
 }
 
 function miss(sq:Element, coord: number[],player:String){
     sq.classList.add('miss');
     addMsg(`Miss, ${player} attacked [${coord}]`);
-    updateScroll();
 }
 
 function updateScroll(){
