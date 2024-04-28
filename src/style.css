@@ -117,28 +117,41 @@ span{
     align-items: center;
     margin-left: 30px;
 }
-#aircraft{
+.fleetStatus{
+    margin: 10px 0px;
+    height: 2.25em;
+    width: 2.25em;
+
+}
+.fleetStatus.hit{
+    background-image: url("./img/hit.png");
+    background-size: contain;
+}
+.shipRender{
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.aircraft-carrier{
     background-image: url("./img/aircraft-carrier.png");
-    width: 200px;
-    height: 60px;
+    background-position: -1px 5px;
 }
-#battleship{
+.battleship{
     background-image: url("./img/battleship.png");
-    width: 180px;
-    height: 60px;
+    background-position: -1px 12px;
 }
-#cruiser{
+.cruiser{
     background-image: url("./img/cruiser.png");
-    width: 150px;
-    height: 60px;
+    background-size: 110%;
+    background-position: -3px 14px;
 }
-#sub{
+.submarine{
     background-image: url("./img/sub.png");
-    width: 150px;
-    height: 60px;
+    background-size: 105%;
+    background-position: 1px 16px;
 }
-#destroyer{
+.destroyer{
     background-image: url("./img/destroyer.png");
-    width: 100px;
-    height: 60px;
+    background-position: 0px 11px;
 }
