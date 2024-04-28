@@ -1,6 +1,6 @@
 import { Player } from "./player"
 
-interface Game {
+export interface Game{
     player: Player,
     computer: Player,
     gameDone: boolean,
@@ -60,10 +60,10 @@ export function createGame(player:Player, computer:Player): Game{
         },
         checkStatus(player:Player, coords:number[]){
             const ships = player.gameboard.ships;
+            let pid, id: string;
+            // let id: string;
             for(let i=0; i<5;i++){
                 const allC = ships[i].allCoords();
-                let pid: string;
-                let id: string;
                 if(player.gameboard.id==='pBoard') pid = 'Player';
                 else if(player.gameboard.id==='cBoard') pid = 'Computer';
                 for(let j=0; j<allC.length;j++){
@@ -76,6 +76,7 @@ export function createGame(player:Player, computer:Player): Game{
                 if(id!==undefined) break;
             }
             //do something graphically with id
+            renderHit(id, pid);
             if(player.gameboard.shipStatus()){
                 this.gameDone = true;
                 let winner:string;
@@ -117,3 +118,17 @@ function addMsg(message:string){
     log.appendChild(msg);
 }
 
+function renderHit(id:string, pid:string){
+    let fleetID;
+    if(pid==='Computer') fleetID = 'cfleet';
+    else if(pid==='Player') fleetID = 'pfleet';
+    const fleet = document.getElementById(fleetID);
+    const hitShip = fleet.querySelector(`span.${id}`);
+    const shipStatSq = hitShip.querySelectorAll('div');
+    for(let i=0;i<shipStatSq.length;i++){
+        if(!shipStatSq[i].classList.contains('hit')){
+            shipStatSq[i].classList.add('hit');
+            break;
+        }
+    }
+}
