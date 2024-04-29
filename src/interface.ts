@@ -6,10 +6,10 @@ export function init(size:number, player: Player, computer:Player){
     initBoard(size);
     const game = createGame(player, computer)
     game.initAttackInt();
-    game.positionShip(player);
+    game.positionShip();
     renderShips(computer); //dev only
-    renderFleet(game.player);
-    renderFleet(game.computer);
+    renderFleet('pfleet');
+    renderFleet('cfleet');
 }
 
 export function renderShips(player: Player){
@@ -65,15 +65,13 @@ function drawBoard(size:number){
     return board;
 }
 
-function renderFleet(player: Player){
-    const ships = player.gameboard.ships;
-    let fleetID:string;
-    if(player.gameboard.id==='pBoard') fleetID = 'pfleet';
-    else if(player.gameboard.id==='cBoard') fleetID = 'cfleet';
+function renderFleet(fleetID: string){
     const fleet = document.getElementById(fleetID);
-    for(let i=0; i<ships.length; i++){
-        const id = ships[i].id;
-        const length = ships[i].length;
+    for(let i=0; i<5; i++){
+        const ships = [[5,'aircraft-carrier'],[4,'battleship'],[3,'cruiser'],
+                       [3,'submarine'],[2,'destroyer']];
+        const length = Number(ships[i][0]);
+        const id = String(ships[i][1]);
         const span = document.createElement('span');
         span.classList.add(id);
         span.classList.add('shipRender');
