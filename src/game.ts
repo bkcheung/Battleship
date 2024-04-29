@@ -6,7 +6,7 @@ export interface Game{
     computer: Player,
     gameDone: boolean,
     initAttackInt: () => void,
-    positionShip: (player:Player) => void,
+    positionShip: () => void,
     compPlay: (player: Player) => void,
     checkStatus: (player: Player, coords: number[]) => void,
 }
@@ -33,50 +33,55 @@ export function createGame(player:Player, computer:Player): Game{
                             this.checkStatus(computer, coords);
                         }
                         else{miss(cBodySq[i], coords, 'Player')}
-                        if(this.gameDone===false)this.compPlay(player);
+                        if(this.gameDone===false)this.compPlay();
                         updateScroll();
                     } 
                 });
             }
         },
-        positionShip(player:Player){
+        positionShip(){
             const ships = [[5,'aircraft-carrier'],[4,'battleship'],[3,'cruiser'],
                            [3,'submarine'],[2,'destroyer']];
             let count  = 4;
+            addMsg(`Place ${ships[count][1]}, ship length: ${ships[count][0]}`);
             document.addEventListener('click', (event) => {
                 if(count>-1){
                     const length = Number(ships[count][0]);
                     const id = String(ships[count][1]);
-                    const orientation = 'h'
+                    const orientation = 'h';
                     const clicked = event.target as HTMLElement;
                     const row = Number(clicked.getAttribute('row'));
                     const col = Number(clicked.getAttribute('col'));
                     const coords = [row,col];
-                    if(player.gameboard.placeShip(id,length,coords,orientation)){
+                    if(this.player.gameboard.placeShip(id,length,coords,orientation)){
                         count--;
                         if(count===-1){
                             this.gameDone = false;
-                            renderShips(player);
+                            addMsg('All ships placed; let the game begin!');
+                            renderShips(this.player);
+                        } else{
+                            addMsg('Success!');
+                            addMsg(`Place ${ships[count][1]}, ship length: ${ships[count][0]}`);
                         }
                     }
-                    else console.log('Invalid');
+                    else addMsg('Please select a valid position');
                 } 
             })
         },        
-        compPlay(player:Player){
+        compPlay(){
             setTurn('cturn');
             setTimeout(()=>{
-                const coords = player.genAttack();
+                const coords = this.player.genAttack();
                 const row = coords[0];
                 const col = coords[1];
-                const pgb = player.gameboard;
+                const pgb = this.player.gameboard;
                 const pBoard = document.getElementById(`${pgb.id}`);
                 const sq = Array.from(pBoard.getElementsByClassName('bodySq')).filter(el => {
                     return Number(el.getAttribute('row'))===row && Number(el.getAttribute('col'))===col;
                 })[0];
-                if(player.gameboard.receiveAttack(coords)){ 
+                if(this.player.gameboard.receiveAttack(coords)){ 
                     hit(sq, coords, 'Computer');
-                    this.checkStatus(player, coords);
+                    this.checkStatus(this.player, coords);
                 } else {
                     miss(sq, coords, 'Computer');
                 }
@@ -141,6 +146,7 @@ function addMsg(message:string){
     msg.classList.add('logMsg');
     msg.innerHTML = `${message}`;
     log.appendChild(msg);
+    updateScroll();
 }
 
 function renderHit(id:string, pid:string){
