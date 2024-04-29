@@ -37,22 +37,6 @@ export function createPlayer(size:number, gameboard: Board): Player{
         }
     }
 }
-// export function populateBoard(board: Board){
-//     const ships = [[5,'aircraft-carrier'],[4,'battleship'],[3,'cruiser'],[3,'submarine'],[2,'destroyer']]
-//     const orients = ['h','v'];
-//     let success = false;
-//     for(let i=0;i<5;i++){
-//         while(!success){
-//             const length = Number(ships[i][0]);
-//             const id = String(ships[i][1]);
-//             const coords = genCoords(board.size);
-//             const orientation = orients[Math.round(Math.random())];
-//             success = board.placeShip(id,length,coords,orientation);
-//         }
-//         success = false;
-//     }
-//     return board;
-// }
 
 function genCoords(boardSize: number){
     const randR = Math.floor(Math.random()*boardSize);
