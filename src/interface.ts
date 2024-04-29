@@ -1,26 +1,18 @@
 import { Ship } from "./ship";
 import { Player} from "./player";
-import { Game, createGame } from "./game"
-
+import { createGame } from "./game"
 
 export function init(size:number, player: Player, computer:Player){
     initBoard(size);
     const game = createGame(player, computer)
     game.initAttackInt();
-    renderShips(player);
-    renderShips(computer); //dev
+    game.positionShip(player);
+    renderShips(computer); //dev only
     renderFleet(game.player);
     renderFleet(game.computer);
 }
 
-function initBoard(size:number){
-    const cBoard = document.getElementById('cBoard');
-    cBoard.appendChild(drawBoard(size));
-    const pBoard = document.getElementById('pBoard');
-    pBoard.appendChild(drawBoard(size));
-}
-
-function renderShips(player: Player){
+export function renderShips(player: Player){
     const gameboard = player.gameboard;
     const id = gameboard.id;
     const ships = gameboard.ships;
@@ -28,6 +20,13 @@ function renderShips(player: Player){
         const coords = ship.allCoords();
         coords.forEach((coord:number[])=>{ rShipPresent(coord, id);})
     })
+}
+
+function initBoard(size:number){
+    const cBoard = document.getElementById('cBoard');
+    cBoard.appendChild(drawBoard(size));
+    const pBoard = document.getElementById('pBoard');
+    pBoard.appendChild(drawBoard(size));
 }
 
 function rShipPresent(coord: number[], id:string){
