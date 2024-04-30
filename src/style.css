@@ -2,6 +2,7 @@ body {
     font-family: Consolas, DejaVu Sans Mono, Menlo;
     background-image: url(./img/water.jpeg);
     background-size: cover;
+    margin: 0px;
 }
 header {
     margin: 30px;
@@ -13,11 +14,16 @@ span{
     background-repeat: no-repeat;
     display: flex;
 }
+#pageTop{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0px;
+}
 #battleLog{
-    flex:1;
+    margin: 30px;
+    width: 50%;
     color: #ffffffd9;
     padding: 10px;
-    margin: 30px;
     background-color: #00000057;
     border: 2px #ffffff70 outset;
     border-radius: 0.5em;
@@ -39,10 +45,11 @@ span{
 #pageBody{
     margin: 30px 0px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     color: #ffffffd9;
 }
 .gb{
+    margin: 0px 0px 0px 30px;
     padding: 10px;
     text-align: center;
     background-color: #00000057;
@@ -96,10 +103,8 @@ span{
 .shipPresent{
     background-color: #ffffff88;
 }
-#pageTop{
-    display: flex;
-}
 #fleetSection{
+    margin: 0px 30px;
     padding: 10px;
     color: #ffffffd9;
     background-color: #00000057;
@@ -158,4 +163,15 @@ span{
 .destroyer{
     background-image: url("./img/destroyer.png");
     background-position: 0px 11px;
+}
+footer{
+    color: #ffffffd9;
+    padding: 10px;
+    text-align: center;
+    justify-items: center;
+}
+#github{
+    padding: 0px;
+    color: #ffffffd9;
+    text-decoration: none;
 }

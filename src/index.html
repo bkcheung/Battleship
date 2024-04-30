@@ -9,9 +9,11 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <header>BattleShip</header>
-        <div id="battleLog">
-            <div id = "log"></div>
+        <div id="pageTop">
+            <header>BattleShip</header>
+            <div id="battleLog">
+                <div id = "log"></div>
+            </div>
         </div>
         <div id = "pageBody">
             <div id = "computer" class = "gb">
@@ -29,8 +31,13 @@
                 </div>
             </div> 
         </div>
-        
-           
+        <footer>
+            Copyright &copy
+            <script>
+              document.write(`${new Date().getFullYear()}`);
+            </script>
+            <a id="github" href="https://github.com/bkcheung">bkcheung</a>
+        </footer>
         <script src="" async defer></script>
     </body>
 </html>

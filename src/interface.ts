@@ -9,7 +9,6 @@ export function init(size:number, player: Player, computer:Player){
     game.positionShip();
     renderShips(computer); //dev only
     renderFleet('pfleet');
-    // renderFleet('cfleet');
 }
 
 export function renderShips(player: Player){
