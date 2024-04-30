@@ -10,6 +10,9 @@
     </head>
     <body>
         <header>BattleShip</header>
+        <div id="battleLog">
+            <div id = "log"></div>
+        </div>
         <div id = "pageBody">
             <div id = "computer" class = "gb">
                 <h3 class = "name">Computer</h3>
@@ -19,25 +22,15 @@
                 <h3 class = "name"> Player </h3>
                 <div id = "pBoard"></div>
             </div>
-            <div id="battleLog">
-                <h3 class = "name"> Battle Log </h3>
-                <div>
-                    <div id = "log"></div>
-                    <div id="status" turn="pturn">...awaiting player's attack</div>
+            <div id ="fleetSection">
+                <div class = "fleet">
+                    <h3 class = "name">Player's Fleet: </h3>
+                    <div class = "fleetList" id = "pfleet"></div>
                 </div>
-                </div>
-            </div>
+            </div> 
         </div>
-        <div id ="fleetSection">
-            <div class = "fleet">
-                <h3 class = "name">Computer's Fleet: </h3>
-                <div class = "fleetList" id = "cfleet"></div>
-            </div>
-            <div class = "fleet">
-                <h3 class = "name">Player's Fleet: </h3>
-                <div class = "fleetList" id = "pfleet"></div>
-            </div>
-        </div>    
+        
+           
         <script src="" async defer></script>
     </body>
 </html>

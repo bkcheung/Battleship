@@ -69,7 +69,7 @@ export function createGame(player:Player, computer:Player): Game{
             })
         },        
         compPlay(){
-            setTurn('cturn');
+            addMsg("...computer is taking aim");
             setTimeout(()=>{
                 const coords = this.player.genAttack();
                 const row = coords[0];
@@ -86,13 +86,12 @@ export function createGame(player:Player, computer:Player): Game{
                     miss(sq, coords, 'Computer');
                 }
                 updateScroll();
-                setTurn('pturn');
-            },250);
+                addMsg("...awaiting player's shot");
+            },500);
         },
         checkStatus(player:Player, coords:number[]){
             const ships = player.gameboard.ships;
             let pid, id: string;
-            // let id: string;
             for(let i=0; i<5;i++){
                 const allC = ships[i].allCoords();
                 if(player.gameboard.id==='pBoard') pid = 'Player';
@@ -106,7 +105,7 @@ export function createGame(player:Player, computer:Player): Game{
                 }
                 if(id!==undefined) break;
             }
-            renderHit(id, pid);
+            if(pid==='Player') renderHit(id);
             if(player.gameboard.shipStatus()){
                 this.gameDone = true;
                 let winner:string;
@@ -116,13 +115,6 @@ export function createGame(player:Player, computer:Player): Game{
             }
         },
     }
-}
-
-function setTurn(turnID:string){
-    const turn = document.getElementById('status');
-    turn.setAttribute('turn',turnID);
-    if(turnID==='cturn'){turn.innerHTML = "...awaiting computer's attack";}
-    else if(turnID==='pturn'){turn.innerHTML = "...awaiting player's attack"}
 }
 
 function hit(sq:Element, coord: number[], player:String){
@@ -149,11 +141,8 @@ function addMsg(message:string){
     updateScroll();
 }
 
-function renderHit(id:string, pid:string){
-    let fleetID;
-    if(pid==='Computer') fleetID = 'cfleet';
-    else if(pid==='Player') fleetID = 'pfleet';
-    const fleet = document.getElementById(fleetID);
+function renderHit(id:string){
+    const fleet = document.getElementById('pfleet');
     const hitShip = fleet.querySelector(`span.${id}`);
     const shipStatSq = hitShip.querySelectorAll('div');
     for(let i=0;i<shipStatSq.length;i++){

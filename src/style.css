@@ -5,7 +5,7 @@ body {
 }
 header {
     margin: 30px;
-    font-size: 5em;
+    font-size: 3em;
     color: #ffffffd9;
 }
 span{
@@ -14,23 +14,21 @@ span{
     display: flex;
 }
 #battleLog{
+    flex:1;
     color: #ffffffd9;
     padding: 10px;
+    margin: 30px;
     background-color: #00000057;
     border: 2px #ffffff70 outset;
-    border-radius: 1em;
-    min-height: 95%;
+    border-radius: 0.5em;
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: space-between;
 }
 #log{
-    margin: 10px;
     text-align: left;
-    background-color: #0000005c;
-    border-radius: 0.5em;
-    height: 20em;
+    height: 5em;
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -38,15 +36,10 @@ span{
 .logMsg{
     margin: 10px;
 }
-#status{
-    margin: 30px;
-}
 #pageBody{
-    margin-left: 30px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    align-items: center;
+    margin: 30px 0px;
+    display: flex;
+    justify-content: space-evenly;
     color: #ffffffd9;
 }
 .gb{
@@ -83,9 +76,17 @@ span{
     min-width: 2em;
     min-height: 2em;
 }
-.bodySq:hover{
-    background-color: white;
+.csq:hover{
+    background: url('./img/crosshair.png');
+    background-size:contain;
+    background-color: rgba(255, 255, 255, 0.35);
 }
+.psq:hover{
+    background-color: rgba(255, 255, 255, 0.434);
+}
+/* .psq:hover > .psq:hover {
+    background-color: rgba(255, 255, 255, 0.434);
+} */
 .bodySq.hit{
     background-color: rgba(255, 0, 0, 0.5);
 }
@@ -95,9 +96,10 @@ span{
 .shipPresent{
     background-color: #ffffff88;
 }
-
+#pageTop{
+    display: flex;
+}
 #fleetSection{
-    margin: 30px;
     padding: 10px;
     color: #ffffffd9;
     background-color: #00000057;
@@ -110,10 +112,12 @@ span{
 }
 .fleet{
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
 .fleetList{
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin-left: 30px;
 }

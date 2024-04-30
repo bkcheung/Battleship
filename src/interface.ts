@@ -9,7 +9,7 @@ export function init(size:number, player: Player, computer:Player){
     game.positionShip();
     renderShips(computer); //dev only
     renderFleet('pfleet');
-    renderFleet('cfleet');
+    // renderFleet('cfleet');
 }
 
 export function renderShips(player: Player){
@@ -24,9 +24,9 @@ export function renderShips(player: Player){
 
 function initBoard(size:number){
     const cBoard = document.getElementById('cBoard');
-    cBoard.appendChild(drawBoard(size));
+    cBoard.appendChild(drawBoard(size, 'csq'));
     const pBoard = document.getElementById('pBoard');
-    pBoard.appendChild(drawBoard(size));
+    pBoard.appendChild(drawBoard(size, 'psq'));
 }
 
 function rShipPresent(coord: number[], id:string){
@@ -36,7 +36,7 @@ function rShipPresent(coord: number[], id:string){
     numSq[index].classList.add('shipPresent');
 }
 
-function drawBoard(size:number){
+function drawBoard(size:number, id:string){
     const board = document.createElement('div');
     board.classList.add('gameboard');
     const letterSq = document.createElement('div');
@@ -57,6 +57,7 @@ function drawBoard(size:number){
         for(let j=0;j<size;j++){
             const bodySq = document.createElement('div');
             bodySq.classList.add('bodySq');
+            bodySq.classList.add(`${id}`);
             bodySq.setAttribute('row',`${i}`);
             bodySq.setAttribute('col',`${j}`);
             board.appendChild(bodySq);
