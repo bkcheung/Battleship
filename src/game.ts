@@ -6,7 +6,6 @@ export interface Game{
     computer: Player,
     gameDone: boolean,
     initAttackInt: () => void,
-    positionShip: () => void,
     compPlay: (player: Player) => void,
     checkStatus: (player: Player, coords: number[]) => void,
 }
@@ -38,35 +37,6 @@ export function createGame(player:Player, computer:Player): Game{
                     } 
                 });
             }
-        },
-        positionShip(){
-            const ships = [[5,'aircraft-carrier'],[4,'battleship'],[3,'cruiser'],
-                           [3,'submarine'],[2,'destroyer']];
-            let count  = 4;
-            addMsg(`Place ${ships[count][1]}, ship length: ${ships[count][0]}`);
-            document.addEventListener('click', (event) => {
-                if(count>-1){
-                    const length = Number(ships[count][0]);
-                    const id = String(ships[count][1]);
-                    const orientation = 'h';
-                    const clicked = event.target as HTMLElement;
-                    const row = Number(clicked.getAttribute('row'));
-                    const col = Number(clicked.getAttribute('col'));
-                    const coords = [row,col];
-                    if(this.player.gameboard.placeShip(id,length,coords,orientation)){
-                        count--;
-                        if(count===-1){
-                            this.gameDone = false;
-                            addMsg('All ships placed; let the game begin!');
-                            renderShips(this.player);
-                        } else{
-                            addMsg('Success!');
-                            addMsg(`Place ${ships[count][1]}, ship length: ${ships[count][0]}`);
-                        }
-                    }
-                    else addMsg('Please select a valid position');
-                } 
-            })
         },        
         compPlay(){
             addMsg("...computer is taking aim");

@@ -14,6 +14,43 @@ span{
     background-repeat: no-repeat;
     display: flex;
 }
+#playerInput{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: rgba(255, 255, 255, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#playerInput.hidden{
+    display: none;
+}
+#pform{
+    background-color: black;
+    padding: 30px;
+    border-radius: 1em;
+}
+#rotate{
+    background-color: rgba(255, 255, 255, 0.5);
+    margin:15px;
+    border-radius: 0.5em;
+}
+#place{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.placeSq:hover{
+    background-color: rgba(255, 255, 255, 0.434);
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
 #pageTop{
     display: flex;
     justify-content: space-between;
@@ -88,12 +125,6 @@ span{
     background-size:contain;
     background-color: rgba(255, 255, 255, 0.35);
 }
-.psq:hover{
-    background-color: rgba(255, 255, 255, 0.434);
-}
-/* .psq:hover > .psq:hover {
-    background-color: rgba(255, 255, 255, 0.434);
-} */
 .bodySq.hit{
     background-color: rgba(255, 0, 0, 0.5);
 }

@@ -1,12 +1,13 @@
 import { Ship } from "./ship";
 import { Player} from "./player";
 import { createGame } from "./game"
+import { placeShips } from "./playerInput"
 
 export function init(size:number, player: Player, computer:Player){
     initBoard(size);
     const game = createGame(player, computer)
     game.initAttackInt();
-    game.positionShip();
+    placeShips(game);
     renderShips(computer); //dev only
     renderFleet('pfleet');
 }
@@ -35,7 +36,7 @@ function rShipPresent(coord: number[], id:string){
     numSq[index].classList.add('shipPresent');
 }
 
-function drawBoard(size:number, id:string){
+export function drawBoard(size:number, id:string){
     const board = document.createElement('div');
     board.classList.add('gameboard');
     const letterSq = document.createElement('div');
