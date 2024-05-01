@@ -94,11 +94,11 @@ function miss(sq:Element, coord: number[],player:String){
     addMsg(`Miss, ${player} attacked [${coord}]`);
 }
 function updateScroll(){
-    var log = document.getElementById("log");
+    var log = document.getElementById("battleLog");
     log.scrollTop = log.scrollHeight;
 }
 function addMsg(message:string){
-    const log = document.getElementById('log');
+    const log = document.getElementById('battleLog');
     const msg = document.createElement('div');
     msg.classList.add('logMsg');
     msg.innerHTML = `${message}`;

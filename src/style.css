@@ -70,23 +70,18 @@ button{
 }
 #battleLog{
     margin: 30px;
-    width: 50%;
-    color: #ffffffd9;
     padding: 10px;
+    width: 50%;
+    height:5em;
+    color: #ffffffd9;
     background-color: #00000057;
     border: 2px #ffffff70 outset;
     border-radius: 0.5em;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    justify-content: space-between;
-}
-#log{
     text-align: left;
-    height: 5em;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto
 }
 .logMsg{
     margin: 10px;
