@@ -1,13 +1,15 @@
 import { Ship } from "./ship";
 import { Player} from "./player";
 import { createGame } from "./game"
-import { placeShips } from "./playerInput"
+import { createOverlay, Overlay } from "./playerInput"
 
 export function init(size:number, player: Player, computer:Player){
     initBoard(size);
     const game = createGame(player, computer)
     game.initAttackInt();
-    placeShips(game);
+    const overlay = createOverlay(game);
+    overlay.positionShip();
+    overlayInit(overlay);
     renderShips(computer); //dev only
     renderFleet('pfleet');
 }
@@ -85,4 +87,15 @@ function renderFleet(fleetID: string){
         span.appendChild(status);
         fleet.appendChild(span);
     }
+}
+
+function overlayInit(overlay:Overlay){
+    document.getElementById('placeBoard').appendChild(drawBoard(10,'placeSq'));
+    const rotate = document.getElementById('rotate');
+    rotate.addEventListener('click',(e)=>{
+        e.preventDefault();
+        if(overlay.orientation==='h') overlay.orientation='v';
+        else if(overlay.orientation==='v') overlay.orientation='h';
+        console.log(overlay.orientation);
+    })
 }
