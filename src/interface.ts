@@ -1,6 +1,6 @@
 import { Ship } from "./ship";
 import { Player} from "./player";
-import { createGame } from "./game"
+import { createGame, Game } from "./game"
 import { createOverlay, Overlay } from "./playerInput"
 
 export function init(size:number, player: Player, computer:Player){
@@ -9,7 +9,7 @@ export function init(size:number, player: Player, computer:Player){
     game.initAttackInt();
     const overlay = createOverlay(game);
     overlay.positionShip();
-    overlayInit(overlay);
+    overlayInit(overlay, game);
     renderShips(computer, 'csq'); //dev only
     renderFleet('pfleet');
 }
@@ -50,7 +50,7 @@ export function drawBoard(size:number, id:string){
     }
     return board;
 }
-function overlayInit(overlay:Overlay){
+function overlayInit(overlay:Overlay, game:Game){
     document.getElementById('placeBoard').appendChild(drawBoard(10,'placeSq'));
     const rotate = document.getElementById('rotate');
     const currShip = document.getElementById('currShip');
@@ -60,6 +60,14 @@ function overlayInit(overlay:Overlay){
         else if(overlay.orientation==='v') overlay.orientation='h';
         currShip.toggleAttribute('rotated');
         console.log(overlay.orientation);
+    })
+    const auto = document.getElementById('auto');
+    auto.addEventListener('click',(e)=>{
+        e.preventDefault();
+        game.player.populateBoard();
+        game.gameDone = false;
+        document.getElementById("playerInput").classList.add('hidden');
+        renderShips(game.player, 'psq');
     })
 }
 function initBoard(size:number){

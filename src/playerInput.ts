@@ -55,9 +55,6 @@ function getCoords(e:Event){
 function updateImg(ship:string){
     const currShip = document.getElementById('currShip');
     const classList = currShip.classList;
-    //clear exisitng classList
-    while (classList.length > 0) {
-        classList.remove(classList.item(0));
-    }
+    classList.remove(classList.item(0));
     currShip.classList.add(ship);
 }
