@@ -10,34 +10,17 @@ export function init(size:number, player: Player, computer:Player){
     const overlay = createOverlay(game);
     overlay.positionShip();
     overlayInit(overlay);
-    renderShips(computer); //dev only
+    renderShips(computer, 'csq'); //dev only
     renderFleet('pfleet');
 }
-
-export function renderShips(player: Player){
+export function renderShips(player: Player, id:string){
     const gameboard = player.gameboard;
-    const id = gameboard.id;
     const ships = gameboard.ships;
     ships.forEach((ship:Ship) => {
         const coords = ship.allCoords();
         coords.forEach((coord:number[])=>{ rShipPresent(coord, id);})
     })
 }
-
-function initBoard(size:number){
-    const cBoard = document.getElementById('cBoard');
-    cBoard.appendChild(drawBoard(size, 'csq'));
-    const pBoard = document.getElementById('pBoard');
-    pBoard.appendChild(drawBoard(size, 'psq'));
-}
-
-function rShipPresent(coord: number[], id:string){
-    const board = document.getElementById(id);
-    const numSq = board.getElementsByClassName('bodySq');
-    const index = coord[0]*10 + coord[1];
-    numSq[index].classList.add('shipPresent');
-}
-
 export function drawBoard(size:number, id:string){
     const board = document.createElement('div');
     board.classList.add('gameboard');
@@ -67,7 +50,27 @@ export function drawBoard(size:number, id:string){
     }
     return board;
 }
-
+function overlayInit(overlay:Overlay){
+    document.getElementById('placeBoard').appendChild(drawBoard(10,'placeSq'));
+    const rotate = document.getElementById('rotate');
+    rotate.addEventListener('click',(e)=>{
+        e.preventDefault();
+        if(overlay.orientation==='h') overlay.orientation='v';
+        else if(overlay.orientation==='v') overlay.orientation='h';
+        console.log(overlay.orientation);
+    })
+}
+function initBoard(size:number){
+    const cBoard = document.getElementById('cBoard');
+    cBoard.appendChild(drawBoard(size, 'csq'));
+    const pBoard = document.getElementById('pBoard');
+    pBoard.appendChild(drawBoard(size, 'psq'));
+}
+function rShipPresent(coord: number[], id:string){
+    const numSq = document.getElementsByClassName(id);
+    const index = coord[0]*10 + coord[1];
+    numSq[index].classList.add('shipPresent');
+}
 function renderFleet(fleetID: string){
     const fleet = document.getElementById(fleetID);
     for(let i=0; i<5; i++){
@@ -87,15 +90,4 @@ function renderFleet(fleetID: string){
         span.appendChild(status);
         fleet.appendChild(span);
     }
-}
-
-function overlayInit(overlay:Overlay){
-    document.getElementById('placeBoard').appendChild(drawBoard(10,'placeSq'));
-    const rotate = document.getElementById('rotate');
-    rotate.addEventListener('click',(e)=>{
-        e.preventDefault();
-        if(overlay.orientation==='h') overlay.orientation='v';
-        else if(overlay.orientation==='v') overlay.orientation='h';
-        console.log(overlay.orientation);
-    })
 }

@@ -29,8 +29,9 @@ export function createOverlay(game: Game): Overlay {
                             if(count===-1){
                                 this.game.gameDone = false;
                                 document.getElementById("playerInput").classList.add('hidden');
-                                renderShips(this.game.player);
+                                renderShips(this.game.player, 'psq');
                             } else {
+                                renderShips(this.game.player, 'placeSq');
                                 updateMsg(`Please place ${this.ships[count][1]}`);
                                 updateImg(this.ships[count][1]);
                             }
