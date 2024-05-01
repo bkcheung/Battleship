@@ -53,10 +53,12 @@ export function drawBoard(size:number, id:string){
 function overlayInit(overlay:Overlay){
     document.getElementById('placeBoard').appendChild(drawBoard(10,'placeSq'));
     const rotate = document.getElementById('rotate');
+    const currShip = document.getElementById('currShip');
     rotate.addEventListener('click',(e)=>{
         e.preventDefault();
         if(overlay.orientation==='h') overlay.orientation='v';
         else if(overlay.orientation==='v') overlay.orientation='h';
+        currShip.toggleAttribute('rotated');
         console.log(overlay.orientation);
     })
 }
