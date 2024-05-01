@@ -1,4 +1,3 @@
-import { renderShips } from "./interface";
 import { Player } from "./player"
 
 export interface Game{
@@ -9,8 +8,8 @@ export interface Game{
     compPlay: (player: Player) => void,
     checkStatus: (player: Player, coords: number[]) => void,
 }
-
 export function createGame(player:Player, computer:Player): Game{
+    addMsg("Welcome to Battleship. Please initate attack on your opponent's waters.");
     return{
         player,
         computer,
@@ -86,22 +85,18 @@ export function createGame(player:Player, computer:Player): Game{
         },
     }
 }
-
 function hit(sq:Element, coord: number[], player:String){
     sq.classList.add('hit');
     addMsg(`Hit! ${player} attacked [${coord}]`);
 }
-
 function miss(sq:Element, coord: number[],player:String){
     sq.classList.add('miss');
     addMsg(`Miss, ${player} attacked [${coord}]`);
 }
-
 function updateScroll(){
     var log = document.getElementById("log");
     log.scrollTop = log.scrollHeight;
 }
-
 function addMsg(message:string){
     const log = document.getElementById('log');
     const msg = document.createElement('div');
@@ -110,7 +105,6 @@ function addMsg(message:string){
     log.appendChild(msg);
     updateScroll();
 }
-
 function renderHit(id:string){
     const fleet = document.getElementById('pfleet');
     const hitShip = fleet.querySelector(`span.${id}`);
