@@ -44,6 +44,13 @@ span{
     flex-direction: column;
     align-items: center;
 }
+#currShip{
+    width: 200px;
+    display: flex;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .placeSq:hover{
     background-color: rgba(255, 255, 255, 0.434);
 }
@@ -161,7 +168,6 @@ span{
     margin: 10px 0px;
     height: 2.25em;
     width: 2.25em;
-
 }
 .fleetStatus.hit{
     background-image: url("./img/hit.png");
