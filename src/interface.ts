@@ -11,8 +11,10 @@ export function init(size:number, player: Player, computer:Player){
     overlay.positionShip();
     overlayInit(overlay, game);
     renderFleet('fleetSection');
+    styleLog();
     window.addEventListener('resize',()=>{
         styleFleet();
+        styleLog();
     })
 }
 export function renderShips(player: Player, id:string){
@@ -116,18 +118,30 @@ function styleFleet(){
     const fleetSect = document.getElementById('fleetSection');
     const pfleet = document.getElementById('pfleet');
     const gbWidth = document.getElementById('gbs').offsetWidth;
-    console.log()
-        if(window.innerWidth>1240){
-            pb.setAttribute("style", 
-            "flex-direction: row; align-items:stretch");
-            fleetSect.setAttribute("style", `margin: 0px 1em; 
-            flex-direction: column; width: ""`);
-            pfleet.style.flexDirection = "column";
-        } else {
-            pb.setAttribute("style", 
-            "flex-direction: column; align-items:center");
-            fleetSect.setAttribute("style", `margin: 1em 0px; 
-            flex-direction: row; width: calc(${gbWidth}px - 6em)`);
-            pfleet.style.flexDirection = "row";
-        }
+    if(window.innerWidth>1240){
+        pb.setAttribute("style", 
+        "flex-direction: row; align-items:stretch");
+        fleetSect.setAttribute("style", `margin: 0px 1em; 
+        flex-direction: column; width: ""`);
+        pfleet.style.flexDirection = "column";
+    } else {
+        pb.setAttribute("style", 
+        "flex-direction: column; align-items:center");
+        fleetSect.setAttribute("style", `margin: 1em 0px; 
+        flex-direction: row; width: calc(${gbWidth}px - 6em)`);
+        pfleet.style.flexDirection = "row";
+    }
+}
+
+function styleLog(){
+    const gbWidth = document.getElementById('gbs').offsetWidth;
+    const fleetWidth = document.getElementById('pfleet').offsetWidth;
+    const bLog = document.getElementById('battleLog');
+    if(window.innerWidth>1240){
+        const margin = (window.innerWidth-gbWidth+fleetWidth)/2;
+        bLog.setAttribute("style", `margin-right: calc(${margin}px - 13em)`);
+    } else {
+        const margin = (window.innerWidth-gbWidth)/2;
+        bLog.setAttribute("style", `margin-right: calc(${margin}px + 1em)`);
+    }
 }
