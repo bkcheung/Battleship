@@ -10,8 +10,10 @@ export function init(size:number, player: Player, computer:Player){
     const overlay = createOverlay(game);
     overlay.positionShip();
     overlayInit(overlay, game);
-    renderShips(computer, 'csq'); //dev only
-    renderFleet('pfleet');
+    renderFleet('fleetSection');
+    window.addEventListener('resize',()=>{
+        styleFleet();
+    })
 }
 export function renderShips(player: Player, id:string){
     const gameboard = player.gameboard;
@@ -81,8 +83,13 @@ function rShipPresent(coord: number[], id:string){
     const index = coord[0]*10 + coord[1];
     numSq[index].classList.add('shipPresent');
 }
-function renderFleet(fleetID: string){
-    const fleet = document.getElementById(fleetID);
+function renderFleet(fleetID:string){
+    const fleetW = document.getElementById(fleetID);
+    const fleet = Object.assign(document.createElement('div'),{
+        class: 'fleetList',
+        id: 'pfleet'
+    })
+    fleet.style.display = "flex";
     for(let i=0; i<5; i++){
         const ships = [[5,'aircraft-carrier'],[4,'battleship'],[3,'cruiser'],
                        [3,'submarine'],[2,'destroyer']];
@@ -100,4 +107,27 @@ function renderFleet(fleetID: string){
         span.appendChild(status);
         fleet.appendChild(span);
     }
+    fleetW.appendChild(fleet);
+    styleFleet();
+}
+
+function styleFleet(){
+    const pb = document.getElementById('pageBody');
+    const fleetSect = document.getElementById('fleetSection');
+    const pfleet = document.getElementById('pfleet');
+    const gbWidth = document.getElementById('gbs').offsetWidth;
+    console.log()
+        if(window.innerWidth>1240){
+            pb.setAttribute("style", 
+            "flex-direction: row; align-items:stretch");
+            fleetSect.setAttribute("style", `margin: 0px 1em; 
+            flex-direction: column; width: ""`);
+            pfleet.style.flexDirection = "column";
+        } else {
+            pb.setAttribute("style", 
+            "flex-direction: column; align-items:center");
+            fleetSect.setAttribute("style", `margin: 1em 0px; 
+            flex-direction: row; width: calc(${gbWidth}px - 6em)`);
+            pfleet.style.flexDirection = "row";
+        }
 }
