@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>BattleShip!</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    <script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+    <body>
+        <div id="pageTop">
+            <header>BattleShip</header>
+            <div id="battleLog"></div>
+        </div>
+        <div id = "pageBody">
+            <div id = "gbs" class="flex-row">
+                <div id = "computer" class = "gb">
+                    <h3 class = "name">Computer</h3>
+                    <div id = "cBoard"></div>
+                </div>
+                <div id = "player" class = "gb">
+                    <h3 class = "name"> Player </h3>
+                    <div id = "pBoard"></div>
+                </div>
+            </div>
+            <div id="fleetSection">
+                <h3 class = "name">Player's Fleet: </h3>
+            </div> 
+        </div>
+        <div id = "playerInput" class = "overlay">
+            <form class="overlayWindow">
+                <div id = "place">
+                    <h3 id = "welcomeMsg">Welcome to BattleShip!</h3>
+                    <div class = "flex-row">
+                        <h4 id = "placementMsg"></h4>
+                        <button id="rotate">Rotate</button>
+                        <button id="auto">Auto-assign</button>
+                    </div>
+                    <div class = "flex-row">
+                        <div id="placeBoard"></div>
+                        <div id="currShip"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id = "results" class = "overlay hidden">
+            <div id = "resultW" class ="overlayWindow">
+                <h4 id = "resultMsg"></h4>
+                <button id="restart">Play Again!</button>
+            </div>
+        </div>
+        <footer>
+            Copyright &copy
+            <script>
+              document.write(`${new Date().getFullYear()}`);
+            </script>
+            <a id="github" href="https://github.com/bkcheung">bkcheung</a>
+        </footer>
+        <script src="" async defer></script>
+    </body>
+</html>
