@@ -38,7 +38,6 @@ export function createGame(player:Player, computer:Player): Game{
             }
         },        
         compPlay(){
-            addMsg("...computer is taking aim");
             setTimeout(()=>{
                 const coords = this.player.genAttack();
                 const row = coords[0];
@@ -55,7 +54,6 @@ export function createGame(player:Player, computer:Player): Game{
                     miss(sq, coords, 'Computer');
                 }
                 updateScroll();
-                addMsg("...awaiting player's shot");
             },500);
         },
         checkStatus(player:Player, coords:number[]){
@@ -80,7 +78,7 @@ export function createGame(player:Player, computer:Player): Game{
                 let winner:string;
                 if(player.gameboard.id==='pBoard') winner = 'Computer';
                 else if(player.gameboard.id==='cBoard') winner = 'Player';
-                addMsg(`All ships sunk. ${winner} wins!`);
+                renderResults(winner)
             }
         },
     }
@@ -115,4 +113,19 @@ function renderHit(id:string){
             break;
         }
     }
+}
+function renderResults(winner:string){
+    const results = document.getElementById('results');
+    results.classList.remove('hidden');
+    results.setAttribute("style", "display:flex; flex-direction:column");
+    const resultW = document.getElementById('resultW');
+    resultW.setAttribute("style", 
+    "display:flex; flex-direction:column; align-items:center; padding: 5em");
+    const msg = document.getElementById('resultMsg');
+    msg.innerHTML = `All ships sunk. ${winner} wins!`;
+    const restart = document.getElementById('restart');
+    restart.addEventListener('click', (e)=>{
+        e.preventDefault();
+        window.location.reload();
+    })
 }

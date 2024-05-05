@@ -28,8 +28,8 @@
                 <h3 class = "name">Player's Fleet: </h3>
             </div> 
         </div>
-        <div id = "playerInput">
-            <form id="pform">
+        <div id = "playerInput" class = "overlay">
+            <form class="overlayWindow">
                 <div id = "place">
                     <h3 id = "welcomeMsg">Welcome to BattleShip!</h3>
                     <div class = "flex-row">
@@ -43,6 +43,12 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <div id = "results" class = "overlay hidden">
+            <div id = "resultW" class ="overlayWindow">
+                <h4 id = "resultMsg"></h4>
+                <button id="restart">Play Again!</button>
+            </div>
         </div>
         <footer>
             Copyright &copy

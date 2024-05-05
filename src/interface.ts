@@ -63,7 +63,6 @@ function overlayInit(overlay:Overlay, game:Game){
         if(overlay.orientation==='h') overlay.orientation='v';
         else if(overlay.orientation==='v') overlay.orientation='h';
         currShip.toggleAttribute('rotated');
-        console.log(overlay.orientation);
     })
     const auto = document.getElementById('auto');
     auto.addEventListener('click',(e)=>{
@@ -112,7 +111,6 @@ function renderFleet(fleetID:string){
     fleetW.appendChild(fleet);
     styleFleet();
 }
-
 function styleFleet(){
     const pb = document.getElementById('pageBody');
     const fleetSect = document.getElementById('fleetSection');
@@ -132,7 +130,6 @@ function styleFleet(){
         pfleet.style.flexDirection = "row";
     }
 }
-
 function styleLog(){
     const gbWidth = document.getElementById('gbs').offsetWidth;
     const fleetWidth = document.getElementById('pfleet').offsetWidth;

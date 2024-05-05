@@ -14,7 +14,7 @@ span{
     background-repeat: no-repeat;
     display: flex;
 }
-#playerInput{
+.overlay{
     position: fixed;
     top: 0;
     left: 0;
@@ -26,10 +26,10 @@ span{
     align-items: center;
     justify-content: center;
 }
-#playerInput.hidden{
+.overlay.hidden{
     display: none;
 }
-#pform{
+.overlayWindow{
     background-color: rgba(0, 0, 0, 0.8);
     padding: 0px 30px;
     border-radius: 1em;
@@ -43,6 +43,7 @@ button{
     display:flex;
     flex-direction: column;
     align-items: center;
+    padding: 2em;
 }
 #currShip{
     width: 200px;
@@ -56,9 +57,18 @@ button{
     max-height: 200px;
     margin-top: 90px;
 }
-.placeSq:hover{
-    background-color: rgba(255, 255, 255, 0.434);
+
+@media (hover: hover){
+    .placeSq:hover{
+        background-color: rgba(255, 255, 255, 0.434);
+    }
+    .csq:hover{
+        background: url('./img/crosshair.png');
+        background-size:contain;
+        background-color: rgba(255, 255, 255, 0.35);
+    }
 }
+
 .flex-row{
     display: flex;
     flex-direction: row;
@@ -127,11 +137,7 @@ button{
     min-width: 2em;
     min-height: 2em;
 }
-.csq:hover{
-    background: url('./img/crosshair.png');
-    background-size:contain;
-    background-color: rgba(255, 255, 255, 0.35);
-}
+
 .bodySq.hit{
     background-color: rgba(255, 0, 0, 0.5);
 }
