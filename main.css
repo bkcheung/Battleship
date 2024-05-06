@@ -3,7 +3,7 @@
   \*****************************************************************/
 body {
     font-family: Consolas, DejaVu Sans Mono, Menlo;
-    background-image: url(c147bb6e7ccd2f87ab3a.jpeg);
+    background-image: url(4c1c8afda07789d47f49.jpeg);
     background-size: cover;
     margin: 0px;
 }
@@ -16,6 +16,18 @@ span{
     background-size: contain;
     background-repeat: no-repeat;
     display: flex;
+}
+@media screen and (orientation: portrait) {
+    html {
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        width: 100vh;
+        height: 100vw;
+        overflow-x: hidden;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
 }
 .overlay{
     position: fixed;
