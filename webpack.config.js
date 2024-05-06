@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
-const isProduction = process.env.NODE_ENV == 'production';
+const isProduction = process.env.NODE_ENV == true;
 
 const stylesHandler = 'style-loader';
 
